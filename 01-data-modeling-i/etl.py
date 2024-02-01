@@ -59,8 +59,10 @@ def process(cur, conn, filepath):
                 insert_statement = f"""
                     INSERT INTO actors (
                         id,
-                        login
-                    ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}')
+                        login,
+                        repo_id,
+                        repo_name
+                    ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}', '{each["repo"]["id"]}', '{each["repo"]["name"]}')
                     ON CONFLICT (id) DO NOTHING
                 """
                 # print(insert_statement)
@@ -71,8 +73,9 @@ def process(cur, conn, filepath):
                     INSERT INTO events (
                         id,
                         type,
+                        created_at,
                         actor_id
-                    ) VALUES ('{each["id"]}', '{each["type"]}', '{each["actor"]["id"]}')
+                    ) VALUES ('{each["id"]}', '{each["type"]}','{each["created_at"]}', '{each["actor"]["id"]}')
                     ON CONFLICT (id) DO NOTHING
                 """
                 # print(insert_statement)

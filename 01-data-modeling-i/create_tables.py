@@ -13,6 +13,8 @@ table_create_actors = """
     CREATE TABLE IF NOT EXISTS actors (
         id int,
         login text,
+        repo_id int,
+        repo_name text,
         PRIMARY KEY(id)
     )
 """
@@ -20,6 +22,7 @@ table_create_events = """
     CREATE TABLE IF NOT EXISTS events (
         id text,
         type text,
+        created_at text,
         actor_id int,
         PRIMARY KEY(id),
         CONSTRAINT fk_actor FOREIGN KEY(actor_id) REFERENCES actors(id)
