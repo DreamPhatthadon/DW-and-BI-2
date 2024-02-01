@@ -1,2 +1,3 @@
-# DW-and-BI-2
-DS525 week 2
+# Data Warehouse and Business Intelligence
+
+## Heading 2
