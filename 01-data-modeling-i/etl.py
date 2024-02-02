@@ -58,12 +58,22 @@ def process(cur, conn, filepath):
                 # Insert data into tables here
                 insert_statement = f"""
                     INSERT INTO actors (
-                        id,
-                        login,
+                        actor_id,
+                        actor_login
+                    ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}')
+                    ON CONFLICT (actor_id) DO NOTHING
+                """
+                # print(insert_statement)
+                cur.execute(insert_statement)
+
+                # Insert data into tables here
+                insert_statement = f"""
+                    INSERT INTO repositories (
                         repo_id,
-                        repo_name
-                    ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}', '{each["repo"]["id"]}', '{each["repo"]["name"]}')
-                    ON CONFLICT (id) DO NOTHING
+                        repo_name,
+                        actor_id
+                    ) VALUES ('{each["repo"]["id"]}', '{each["repo"]["name"]}', '{each["actor"]["id"]}')
+                    ON CONFLICT (repo_id) DO NOTHING
                 """
                 # print(insert_statement)
                 cur.execute(insert_statement)
@@ -71,12 +81,12 @@ def process(cur, conn, filepath):
                 # Insert data into tables here
                 insert_statement = f"""
                     INSERT INTO events (
-                        id,
-                        type,
-                        created_at,
-                        actor_id
-                    ) VALUES ('{each["id"]}', '{each["type"]}','{each["created_at"]}', '{each["actor"]["id"]}')
-                    ON CONFLICT (id) DO NOTHING
+                        event_id,
+                        event_type,
+                        event_created_at,
+                        repo_id
+                    ) VALUES ('{each["id"]}', '{each["type"]}','{each["created_at"]}', '{each["repo"]["id"]}')
+                    ON CONFLICT (event_id) DO NOTHING
                 """
                 # print(insert_statement)
                 cur.execute(insert_statement)
