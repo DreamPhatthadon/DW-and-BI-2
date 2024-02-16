@@ -1,0 +1,4 @@
+ขั้นตอนการ Run
+1. สร้าง Folder Python Virtual Environment ด้วยคำสั่ง python -m venv ENV (ENV คือชื่อ Folder)
+2. ใช้คำสั่ง source ENV/bin/activate เพื่อเข้าไปที่ Folder ENV
+3. ใช้คำสั่ง pip install -r requirements.txt เพื่อติดตั้ง Diver Version ที่ตรงกัน
