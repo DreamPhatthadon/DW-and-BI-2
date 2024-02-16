@@ -75,6 +75,7 @@ def process(session, filepath):
                 # Insert data into tables here
 
 
+#ทดสอบ insert data (ตัดทิ้งได้)
 def insert_sample_data(session):
     query = f"""
     INSERT INTO events (id, type, public) VALUES ('23487929637', 'IssueCommentEvent', true)
