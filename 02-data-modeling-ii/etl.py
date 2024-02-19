@@ -11,11 +11,16 @@ table_drop = "DROP TABLE events"
 table_create = """
     CREATE TABLE IF NOT EXISTS events
     (
-        id text,
+        actor_id text,
+        login text,
+        repo_id text,
+        repo_name text,
+        event_id text,
         type text,
-        public boolean,
+        public text,
+
         PRIMARY KEY (
-            id,
+            actor_id,
             type
         )
     )
@@ -70,15 +75,19 @@ def process(session, filepath):
             data = json.loads(f.read())
             for each in data:
                 # Print some sample data
-                print(each["id"], each["type"], each["actor"]["login"])
+                #print(each["id"], each["type"], each["actor"]["login"])
 
                 # Insert data into tables here
+                query = f"""
+                INSERT INTO events (actor_id, login, repo_id, repo_name, event_id, type, public) VALUES ('{each["actor"]["id"]}', 
+                '{each["actor"]["login"]}', '{each["repo"]["id"]}','{each["repo"]["name"]}','{each["id"]}','{each["type"]}',
+                '{each["public"]}')
+                """
+                session.execute(query)
 
-
-#ทดสอบ insert data (ตัดทิ้งได้)
 def insert_sample_data(session):
     query = f"""
-    INSERT INTO events (id, type, public) VALUES ('23487929637', 'IssueCommentEvent', true)
+    INSERT INTO events (id, type, login) VALUES ('23487929637', 'IssueCommentEvent', 'true')
     """
     session.execute(query)
 
@@ -107,12 +116,12 @@ def main():
     drop_tables(session)
     create_tables(session)
 
-    # process(session, filepath="../data")
-    insert_sample_data(session)
+    process(session, filepath="../data")
+    #insert_sample_data(session)
 
     # Select data in Cassandra and print them to stdout
     query = """
-    SELECT * from events WHERE id = '23487929637' AND type = 'IssueCommentEvent'
+    SELECT * from events 
     """
     try:
         rows = session.execute(query)

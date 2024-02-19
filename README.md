@@ -1,2 +1,3 @@
 # Data Warehouse and Business Intelligence
-## คำอธิบายเกี่ยวกับสิ่งที่ทำลงไปและ Data Model อยู่ที่ไฟล์ Documentation.txt ใน Folder: 01-data-modeling-i
+## ได้แยกการบ้านแต่ละครั้งออกเป็น Folder ที่แตกต่างกัน
+## โดยคำอธิบายรายละเอียดอยู่ที่ไฟล์ Documentation.txt ของแต่ละ Folder 

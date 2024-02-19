@@ -1,4 +1,19 @@
 ขั้นตอนการ Run
-1. สร้าง Folder Python Virtual Environment ด้วยคำสั่ง python -m venv ENV (ENV คือชื่อ Folder)
-2. ใช้คำสั่ง source ENV/bin/activate เพื่อเข้าไปที่ Folder ENV
-3. ใช้คำสั่ง pip install -r requirements.txt เพื่อติดตั้ง Diver Version ที่ตรงกัน
+1. ใช้คำสั่ง docker-compose.yml เพื่อสร้าง PostgreSQL ผ่านคำสั่ง docker compose up
+2. สร้าง Folder Python Virtual Environment ด้วยคำสั่ง python -m venv ENV (ENV คือชื่อ Folder)
+3. ใช้คำสั่ง source ENV/bin/activate เพื่อเข้าไปที่ Folder ENV
+4. ใช้คำสั่ง pip install -r requirements.txt เพื่อติดตั้ง Diver Version ที่ตรงกัน
+5. เรียกใช้งาน etl.py เพื่อนำข้อมูลจากไฟล์ JSON ลงในตาราง ผ่านคำสั่ง python etl.py
+
+ได้สร้างตารางโดยมี column ดังนี้
+actor_id   เก็บข้อมูล id ของ actor แต่ละคน โดยเก็บข้อมูลเป็น text
+login      เก็บข้อมูลชื่อ login ของ actor ว่าใช้ชื่ออะไร โดยเก็บข้อมูลเป็น text
+repo_id    เก็บข้อมูล id ของ repository โดยเก็บข้อมูลเป็น text
+repo_name  เก็บข้อมูลชื่อของ repository โดยเก็บข้อมูลเป็น text
+event_id   เก็บข้อมูล id ของ event โดยเก็บข้อมูลเป็น text
+type       เก็บข้อมูลประเภทการทำ event โดยเก็บข้อมูลเป็น text
+public     เก็บของมูลว่าการทำ event นั้นได้เปิดเป็น public หรือไม่ โดยเก็บข้อมูลเป็น text
+
+
+การนำ Data ไปใช้คือดูว่า events ที่ถูกทำบ่อยที่สุดคืออะไร เปิดเป็น public หรือไม ทำโดยใคร ทำผ่าน repository อะไร
+เมื่อได้ข้อมูลแล้วสามารถนำไปจัดทำ visualization จากนั้นวิเคราะห์ข้อมูลที่ได้เพื่อพัฒนาธุรกิจต่อไปในอนาคต
